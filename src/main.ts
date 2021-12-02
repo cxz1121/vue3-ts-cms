@@ -18,10 +18,27 @@ app.use(router)
 app.use(store)
 app.mount('#app')
 
-xzRequest.request({
-  url: '/home/multidata',
-  method: 'GET'
-})
+interface dataType {
+  data: any
+  returnCode: string
+  success: boolean
+}
+
+xzRequest
+  .request<dataType>({
+    url: '/home/multidata',
+    method: 'GET'
+  })
+  .then((res) => {
+    console.log(res.data)
+  })
+// xzRequest
+//   .get<dataType>({
+//     url: '/home/multidata'
+//   })
+//   .then((res) => {
+//     console.log(res.data)
+//   })
 
 // console.log(process.env.VUE_APP_BASE_URL)
 // console.log(process.env.VUE_APP_BASE_NAME)

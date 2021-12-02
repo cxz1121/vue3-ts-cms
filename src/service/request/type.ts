@@ -9,6 +9,7 @@ interface XZRequestInterceptors {
 
 interface XZRequestConfig extends AxiosRequestConfig {
   interceptors?: XZRequestInterceptors
+  showLoading?: boolean
 }
 
 export { XZRequestInterceptors, XZRequestConfig }
