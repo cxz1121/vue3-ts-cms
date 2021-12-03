@@ -1,14 +1,14 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios'
 
-interface XZRequestInterceptors {
+interface XZRequestInterceptors<T = AxiosResponse> {
   requestInterceptor?: (config: AxiosRequestConfig) => AxiosRequestConfig
   requestInterceptorsCatch?: (err: any) => any
-  responseInterceptor?: (res: AxiosResponse) => AxiosResponse
+  responseInterceptor?: (res: T) => T
   responseInterceptorsCatch?: (err: any) => any
 }
 
-interface XZRequestConfig extends AxiosRequestConfig {
-  interceptors?: XZRequestInterceptors
+interface XZRequestConfig<T = AxiosResponse> extends AxiosRequestConfig {
+  interceptors?: XZRequestInterceptors<T>
   showLoading?: boolean
 }
 

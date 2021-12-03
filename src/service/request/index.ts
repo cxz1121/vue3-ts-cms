@@ -63,7 +63,7 @@ class XZRequest {
     )
   }
 
-  request<T>(config: XZRequestConfig): Promise<T> {
+  request<T>(config: XZRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       if (config.interceptors?.requestInterceptor) {
         config = config.interceptors.requestInterceptor(config)
@@ -74,6 +74,9 @@ class XZRequest {
       this.instance
         .request<any, T>(config)
         .then((res) => {
+          if (config.interceptors?.responseInterceptor) {
+            res = config.interceptors.responseInterceptor(res)
+          }
           this.showLoading = true
           resolve(res)
         })
@@ -83,7 +86,7 @@ class XZRequest {
         })
     })
   }
-  get<T>(config: XZRequestConfig): Promise<T> {
+  get<T>(config: XZRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       if (config.interceptors?.requestInterceptor) {
         config = config.interceptors.requestInterceptor(config)
@@ -94,6 +97,9 @@ class XZRequest {
       this.instance
         .request<any, T>({ ...config, method: 'GET' })
         .then((res) => {
+          if (config.interceptors?.responseInterceptor) {
+            res = config.interceptors.responseInterceptor(res)
+          }
           this.showLoading = true
           resolve(res)
         })
@@ -103,7 +109,7 @@ class XZRequest {
         })
     })
   }
-  post<T>(config: XZRequestConfig): Promise<T> {
+  post<T>(config: XZRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       if (config.interceptors?.requestInterceptor) {
         config = config.interceptors.requestInterceptor(config)
@@ -114,6 +120,9 @@ class XZRequest {
       this.instance
         .request<any, T>({ ...config, method: 'POST' })
         .then((res) => {
+          if (config.interceptors?.responseInterceptor) {
+            res = config.interceptors.responseInterceptor(res)
+          }
           this.showLoading = true
           resolve(res)
         })
@@ -123,7 +132,7 @@ class XZRequest {
         })
     })
   }
-  delete<T>(config: XZRequestConfig): Promise<T> {
+  delete<T>(config: XZRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       if (config.interceptors?.requestInterceptor) {
         config = config.interceptors.requestInterceptor(config)
@@ -134,6 +143,9 @@ class XZRequest {
       this.instance
         .request<any, T>({ ...config, method: 'DELETE' })
         .then((res) => {
+          if (config.interceptors?.responseInterceptor) {
+            res = config.interceptors.responseInterceptor(res)
+          }
           this.showLoading = true
           resolve(res)
         })
@@ -143,7 +155,7 @@ class XZRequest {
         })
     })
   }
-  patch<T>(config: XZRequestConfig): Promise<T> {
+  patch<T>(config: XZRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       if (config.interceptors?.requestInterceptor) {
         config = config.interceptors.requestInterceptor(config)
@@ -154,6 +166,9 @@ class XZRequest {
       this.instance
         .request<any, T>({ ...config, method: 'PATCH' })
         .then((res) => {
+          if (config.interceptors?.responseInterceptor) {
+            res = config.interceptors.responseInterceptor(res)
+          }
           this.showLoading = true
           resolve(res)
         })
