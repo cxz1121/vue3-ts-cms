@@ -8,9 +8,6 @@ import './assets/css/index.less'
 import xzRequest from './service'
 import { globalRegister } from './global'
 
-// import ElementPlus from 'element-plus'
-// import 'element-plus/dist/index.css'
-
 const app = createApp(App)
 // app.use(ElementPlus)
 
