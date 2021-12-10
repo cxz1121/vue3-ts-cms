@@ -1,53 +1,61 @@
 <template>
   <div class="login-account">
-    <el-form label-width="60px" :rules="rules" :model="account">
-      <el-form-item label="账号">
+    <el-form label-width="80px" :rules="rules" :model="account" ref="formRef">
+      <el-form-item label="账号" prop="name">
         <el-input v-model="account.name"></el-input>
       </el-form-item>
-      <el-form-item label="密码">
-        <el-input v-model="account.password"></el-input>
+      <el-form-item label="密码" prop="password">
+        <el-input v-model="account.password" show-password></el-input>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
+import { ElForm } from 'element-plus'
+import { rules } from '../config/account-config'
+import localCache from '@/utils/cache'
+import { useStore } from 'vuex'
 export default defineComponent({
   components: {},
   setup() {
+    //1定义属性
+    const store = useStore()
+
     const account = reactive({
-      name: '',
-      password: ''
+      name: localCache.getCache('name') ?? '',
+      password: localCache.getCache('password') ?? ''
     })
 
-    //规则
-    const rules = {
-      name: [
-        {
-          required: true,
-          message: '请输入账号',
-          trigger: 'blur'
-        },
-        {
-          pattern: /^[a-z0-9]{5,11}$/,
-          message: '用户名必须是5~11个字母或数字'
+    const formRef = ref<InstanceType<typeof ElForm>>()
+
+    //2定义方法
+    const loginAction = (isKeepPassword: boolean) => {
+      formRef.value?.validate((valid) => {
+        if (valid) {
+          //1是否记住密码
+          if (isKeepPassword) {
+            //本地缓存
+            localCache.setCache('name', account.name)
+            localCache.setCache('password', account.password)
+          } else {
+            localCache.deleteCache('name')
+            localCache.deleteCache('password')
+          }
+
+          //2进行登陆验证
+          store.dispatch('loginModule/accountLoginAction', { ...account })
         }
-      ],
-      password: [
-        {
-          required: true,
-          message: '请输入密码',
-          trigger: 'blur'
-        },
-        {
-          pattern: /^[a-z0-9]{6,}$/,
-          message: '用户名必须是6位以上字母或数字'
-        }
-      ]
+      })
     }
 
-    return { rules, account }
+    return {
+      rules,
+      account,
+      formRef,
+      loginAction
+    }
   }
 })
 </script>

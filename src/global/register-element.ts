@@ -1,5 +1,13 @@
 import type { App } from 'vue'
-import { ElButton, ElIcon, ElInput, ElForm, ElTabs } from 'element-plus'
+import {
+  ElButton,
+  ElIcon,
+  ElInput,
+  ElForm,
+  ElTabs,
+  ElCheckbox,
+  ElLink
+} from 'element-plus'
 import { ElTabPane } from 'element-plus/lib/components/tabs'
 import { ElFormItem } from 'element-plus/lib/components/form'
 import 'element-plus/dist/index.css'
@@ -11,7 +19,9 @@ const components = [
   ElTabPane,
   ElIcon,
   ElForm,
-  ElFormItem
+  ElFormItem,
+  ElCheckbox,
+  ElLink
 ]
 
 export default function (app: App): void {

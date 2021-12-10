@@ -63,7 +63,7 @@ class XZRequest {
     )
   }
 
-  request<T>(config: XZRequestConfig<T>): Promise<T> {
+  request<T = any>(config: XZRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       if (config.interceptors?.requestInterceptor) {
         config = config.interceptors.requestInterceptor(config)
@@ -86,7 +86,7 @@ class XZRequest {
         })
     })
   }
-  get<T>(config: XZRequestConfig<T>): Promise<T> {
+  get<T = any>(config: XZRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       if (config.interceptors?.requestInterceptor) {
         config = config.interceptors.requestInterceptor(config)
@@ -109,7 +109,7 @@ class XZRequest {
         })
     })
   }
-  post<T>(config: XZRequestConfig<T>): Promise<T> {
+  post<T = any>(config: XZRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       if (config.interceptors?.requestInterceptor) {
         config = config.interceptors.requestInterceptor(config)
@@ -132,7 +132,7 @@ class XZRequest {
         })
     })
   }
-  delete<T>(config: XZRequestConfig<T>): Promise<T> {
+  delete<T = any>(config: XZRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       if (config.interceptors?.requestInterceptor) {
         config = config.interceptors.requestInterceptor(config)
@@ -155,7 +155,7 @@ class XZRequest {
         })
     })
   }
-  patch<T>(config: XZRequestConfig<T>): Promise<T> {
+  patch<T = any>(config: XZRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       if (config.interceptors?.requestInterceptor) {
         config = config.interceptors.requestInterceptor(config)
