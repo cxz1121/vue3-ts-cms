@@ -37,3 +37,9 @@ setupStore()
 
 // console.log(process.env.VUE_APP_BASE_URL)
 // console.log(process.env.VUE_APP_BASE_NAME)
+
+// const toLine = (hump: string) =>
+//   hump.replace(/([A-Z]|\d)/g, (l): string => `_${l.toLowerCase()}`)
+// const a = toLine('myComponentTset')
+
+// console.log(a)
