@@ -21,9 +21,10 @@
               <span>{{ item.name }}</span>
             </template>
             <template v-for="subItem in item.children" :key="subItem.id">
-              <template
+              <!-- <template
                 v-if="subItem.children && subItem.children.length !== 0"
-              >
+              > -->
+              <template v-if="subItem.type === 1">
                 <el-sub-menu :index="`${subItem.id}`">
                   <template #title>
                     <el-icon><tickets /></el-icon>
@@ -40,9 +41,10 @@
                   </template>
                 </el-sub-menu>
               </template>
-              <template
+              <!-- <template
                 v-if="!subItem.children || subItem.children.length == 0"
-              >
+              > -->
+              <template v-if="subItem.type === 2">
                 <el-menu-item :index="`${subItem.id}`">
                   <el-icon><tickets /></el-icon>
                   <span>{{ subItem.name }}</span>
