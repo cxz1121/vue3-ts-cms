@@ -9,6 +9,7 @@ import {
 import { IAccount } from '@/service/login/type'
 import localCache from '@/utils/cache'
 import router from '@/router/index'
+import { mapMenuToRoutes } from '@/utils/map-menus'
 
 const loginModule: Module<ILoginState, IRootState> = {
   namespaced: true,
@@ -29,6 +30,11 @@ const loginModule: Module<ILoginState, IRootState> = {
     },
     saveUserMenus(state, userMenus: any) {
       state.userMenus = userMenus
+      const routes = mapMenuToRoutes(userMenus)
+      //将所有匹配的路由添加到router里面 routes => children
+      routes.forEach((route) => {
+        router.addRoute('main', route)
+      })
     }
   },
   actions: {

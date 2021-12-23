@@ -34,7 +34,10 @@
                     v-for="grandItem in subItem.children"
                     :key="grandItem.id"
                   >
-                    <el-menu-item :index="`${grandItem.id}`">
+                    <el-menu-item
+                      :index="`${grandItem.id}`"
+                      @click="handleMenuItemClick(grandItem)"
+                    >
                       <el-icon><location /></el-icon>
                       <span>{{ grandItem.name }}</span>
                     </el-menu-item>
@@ -45,7 +48,10 @@
                 v-if="!subItem.children || subItem.children.length == 0"
               > -->
               <template v-if="subItem.type === 2">
-                <el-menu-item :index="`${subItem.id}`">
+                <el-menu-item
+                  :index="`${subItem.id}`"
+                  @click="handleMenuItemClick(subItem)"
+                >
                   <el-icon><tickets /></el-icon>
                   <span>{{ subItem.name }}</span>
                 </el-menu-item>
@@ -54,7 +60,10 @@
           </el-sub-menu>
         </template>
         <template v-else-if="item.type === 2">
-          <el-menu-item :index="`${item.id}`">
+          <el-menu-item
+            :index="`${item.id}`"
+            @click="handleMenuItemClick(item)"
+          >
             <el-icon><location /></el-icon>
             <span>{{ item.name }}</span>
           </el-menu-item>
@@ -68,6 +77,7 @@
 import { computed, defineComponent } from 'vue'
 import { Tickets, Location, Menu as IconMenu } from '@element-plus/icons'
 import { useStore } from '@/store'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   components: {
@@ -83,8 +93,14 @@ export default defineComponent({
   setup() {
     const store = useStore()
     const userMenus = computed(() => store.state.loginModule.userMenus)
+
+    const router = useRouter()
+    const handleMenuItemClick = (item: any) => {
+      router.push(item.url ?? '/not-found')
+    }
     return {
-      userMenus
+      userMenus,
+      handleMenuItemClick
     }
   }
 })

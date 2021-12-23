@@ -6,8 +6,14 @@ import {
   ElForm,
   ElTabs,
   ElCheckbox,
-  ElLink
+  ElLink,
+  ElAvatar
 } from 'element-plus'
+import {
+  ElDropdown,
+  ElDropdownItem,
+  ElDropdownMenu
+} from 'element-plus/lib/components/dropdown'
 import { ElTabPane } from 'element-plus/lib/components/tabs'
 import { ElFormItem } from 'element-plus/lib/components/form'
 import {
@@ -24,7 +30,7 @@ import {
   ElMenuItemGroup
 } from 'element-plus/lib/components/menu'
 import 'element-plus/dist/index.css'
-import 'element-plus/theme-chalk/base.css'
+// import 'element-plus/theme-chalk/base.css'
 const components = [
   ElButton,
   ElInput,
@@ -43,7 +49,11 @@ const components = [
   ElMenu,
   ElSubMenu,
   ElMenuItem,
-  ElMenuItemGroup
+  ElMenuItemGroup,
+  ElDropdown,
+  ElDropdownItem,
+  ElDropdownMenu,
+  ElAvatar
 ]
 
 export default function (app: App): void {
