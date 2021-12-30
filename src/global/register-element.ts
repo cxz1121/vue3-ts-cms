@@ -7,7 +7,10 @@ import {
   ElTabs,
   ElCheckbox,
   ElLink,
-  ElAvatar
+  ElAvatar,
+  ElRow,
+  ElCol,
+  ElDatePicker
 } from 'element-plus'
 import {
   ElDropdown,
@@ -16,6 +19,7 @@ import {
 } from 'element-plus/lib/components/dropdown'
 import { ElTabPane } from 'element-plus/lib/components/tabs'
 import { ElFormItem } from 'element-plus/lib/components/form'
+import { ElSelect, ElOption } from 'element-plus/lib/components/select'
 import {
   ElContainer,
   ElHeader,
@@ -53,7 +57,12 @@ const components = [
   ElDropdown,
   ElDropdownItem,
   ElDropdownMenu,
-  ElAvatar
+  ElAvatar,
+  ElRow,
+  ElCol,
+  ElSelect,
+  ElOption,
+  ElDatePicker
 ]
 
 export default function (app: App): void {

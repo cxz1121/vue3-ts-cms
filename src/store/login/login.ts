@@ -53,7 +53,7 @@ const loginModule: Module<ILoginState, IRootState> = {
       //3.用户菜单树
       const userMenus = await getUserMenus(userInfo.data.role.id)
       console.log(userMenus)
-      commit('saveUserMenus', userMenus)
+      commit('saveUserMenus', userMenus.data)
       localCache.setCache('userMenus', userMenus.data)
 
       //4.跳到首页

@@ -145,7 +145,7 @@ export default defineComponent({
     background-color: rgba(10, 96, 189, 0.5) !important;
   }
 
-  ::v-deep .el-sub-menu__title:hover {
+  ::v-deep(.el-sub-menu__title:hover) {
     color: #fff !important; // 菜单
     background-color: unset;
   }

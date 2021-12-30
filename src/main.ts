@@ -14,11 +14,13 @@ const app = createApp(App)
 
 // globalRegisterApp(app)
 app.use(globalRegister)
+
+setupStore() //初始化
+
 app.use(router)
 app.use(store)
 app.mount('#app')
 
-setupStore()
 // interface dataType {
 //   data: any
 //   returnCode: string
