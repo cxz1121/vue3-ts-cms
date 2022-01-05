@@ -20,6 +20,11 @@ import {
 import { ElTabPane } from 'element-plus/lib/components/tabs'
 import { ElFormItem } from 'element-plus/lib/components/form'
 import { ElSelect, ElOption } from 'element-plus/lib/components/select'
+import { ElTable, ElTableColumn } from 'element-plus/lib/components/table'
+import {
+  ElBreadcrumb,
+  ElBreadcrumbItem
+} from 'element-plus/lib/components/breadcrumb'
 import {
   ElContainer,
   ElHeader,
@@ -62,7 +67,11 @@ const components = [
   ElCol,
   ElSelect,
   ElOption,
-  ElDatePicker
+  ElDatePicker,
+  ElBreadcrumb,
+  ElBreadcrumbItem,
+  ElTable,
+  ElTableColumn
 ]
 
 export default function (app: App): void {

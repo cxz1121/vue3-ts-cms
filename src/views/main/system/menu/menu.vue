@@ -6,7 +6,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  naem: 'menu',
+  naem: 'cxmenu',
   setup() {
     return {}
   }

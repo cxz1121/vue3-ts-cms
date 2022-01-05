@@ -4,7 +4,7 @@ export interface ILoginState {
   userMenus: any
 }
 
-export interface IUserInfo {
-  id: number
-  name: string
-}
+// export interface IUserInfo {
+//   id: number
+//   name: string
+// }

@@ -9,42 +9,31 @@
         >
           <fold />
         </el-icon>
-        <div class="breadcrumb">11</div>
+        <div class="breadcrumb">
+          <nav-breadcrumb :breadcrumb="breadcrumb" />
+        </div>
       </div>
       <div class="right-content">
-        <el-dropdown placement="bottom-start">
-          <div>
-            <el-avatar
-              class="avatar"
-              :size="32"
-              src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-            ></el-avatar>
-          </div>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item style="border-bottom: 1px solid #f8f8f9">
-                用户信息
-              </el-dropdown-item>
-              <el-dropdown-item
-                style="border-bottom: 1px solid #f8f8f9; padding: 2px 20px"
-              >
-                修改密码
-              </el-dropdown-item>
-              <el-dropdown-item>退出登录</el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
+        <user-info />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
 import { Fold } from '@element-plus/icons'
+import UserInfo from './user-info.vue'
+import NavBreadcrumb, { IBreadcurmb } from '@/base-ui/breadcrumb'
+import { useStore } from '@/store'
+import { pathMapToBreadcrumb } from '@/utils/map-menus'
+import { useRoute } from 'vue-router'
+
 export default defineComponent({
   components: {
-    Fold
+    Fold,
+    UserInfo,
+    NavBreadcrumb
   },
   emits: ['foldChange'],
   setup(props, { emit }) {
@@ -55,8 +44,19 @@ export default defineComponent({
       emit('foldChange', isFold.value)
     }
 
+    const store = useStore()
+
+    //breadcrumb
+    const breadcrumb = computed(() => {
+      const route = useRoute()
+      const currentPath = route.path
+      const userMenus = store.state.loginModule.userMenus
+      return pathMapToBreadcrumb(userMenus, currentPath)
+    })
+
     return {
       isFold,
+      breadcrumb,
       handleFoldClick
     }
   }

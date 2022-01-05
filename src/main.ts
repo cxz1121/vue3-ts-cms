@@ -5,12 +5,12 @@ import store from './store'
 import { setupStore } from './store'
 import 'normalize.css'
 import './assets/css/index.less'
+
 // import './service/axios-demo'
 // import xzRequest from './service'
 import { globalRegister } from './global'
 
 const app = createApp(App)
-// app.use(ElementPlus)
 
 // globalRegisterApp(app)
 app.use(globalRegister)

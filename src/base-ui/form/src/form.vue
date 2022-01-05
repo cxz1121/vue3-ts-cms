@@ -10,6 +10,7 @@
                 :show-password="item.type === 'password'"
                 v-bind="item.otherOptions"
                 style="width: 100%; min-width: 200px"
+                v-model="formData[`${item.field}`]"
               />
             </template>
             <template v-else-if="item.type === 'select'">
@@ -17,6 +18,7 @@
                 :placeholder="item.placeholder"
                 style="width: 100%; min-width: 200px"
                 v-bind="item.otherOptions"
+                v-model="formData[`${item.field}`]"
               >
                 <el-option
                   v-for="option in item.options"
@@ -30,6 +32,7 @@
               <el-date-picker
                 style="width: 100%; min-width: 200px"
                 v-bind="item.otherOptions"
+                v-model="formData[`${item.field}`]"
               ></el-date-picker>
             </template>
           </el-form-item>
@@ -56,12 +59,13 @@
           </el-form-item>
         </el-col> -->
       </el-row>
+      <slot name="footer"></slot>
     </el-form>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType, ref, watch } from 'vue'
 import { IFormItem } from '../types'
 export default defineComponent({
   props: {
@@ -86,10 +90,27 @@ export default defineComponent({
         sm: 24,
         xs: 24
       })
+    },
+    modelValue: {
+      type: Object,
+      require: true
     }
   },
-  setup() {
-    return {}
+  emits: ['update:modelValue'],
+  setup(props, { emit }) {
+    const formData = ref({ ...props.modelValue })
+
+    watch(
+      formData,
+      (newValue) => {
+        emit('update:modelValue', newValue)
+      },
+      {
+        deep: true
+      }
+    )
+
+    return { formData }
   }
 })
 </script>
