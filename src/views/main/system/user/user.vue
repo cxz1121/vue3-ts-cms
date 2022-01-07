@@ -15,11 +15,25 @@
           </div>
         </template>
       </xz-form>
-      <el-table :data="userList" border style="width: 100%">
-        <el-table-column prop="name" label="昵称" width="" />
-        <el-table-column prop="realname" label="真实姓名" width="" />
-        <el-table-column prop="cellphone" label="电话号码" />
-      </el-table>
+      <div class="table">
+        <xz-table
+          :listData="userList"
+          :propsList="propsList"
+          :showIndexColumn="showIndexColumn"
+          :showSelectColumn="showSelectColumn"
+          @selectionChange="selectionChange"
+        >
+          <template #enable="scope">
+            <el-button>{{ scope.row.enable ? '启用' : '禁用' }}</el-button>
+          </template>
+          <template #createAt="scope">
+            <span>{{ $filter.formatTime(scope.row.createAt) }}</span>
+          </template>
+          <template #updateAt="scope">
+            <span>{{ $filter.formatTime(scope.row.updateAt) }}</span>
+          </template>
+        </xz-table>
+      </div>
     </div>
   </div>
 </template>
@@ -27,6 +41,7 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
 import XzForm from '@/base-ui/form'
+import XzTable from '@/base-ui/table'
 import { searchFormConfig } from './config/search.config'
 import { Refresh, Search } from '@element-plus/icons'
 import { useStore } from '@/store'
@@ -36,7 +51,8 @@ export default defineComponent({
   components: {
     XzForm,
     Refresh,
-    Search
+    Search,
+    XzTable
   },
   setup() {
     const formData = ref({
@@ -55,9 +71,52 @@ export default defineComponent({
       }
     })
     const userList = computed(() => store.state.systemModule.userList)
-    const userCount = computed(() => store.state.systemModule.userCount)
 
-    return { formData, searchFormConfig, userList, userCount }
+    const propsList = [
+      { prop: 'name', label: '用户名', minWidth: '100', slotName: 'name' },
+      {
+        prop: 'realname',
+        label: '真实姓名',
+        minWidth: '100',
+        slotName: 'realname'
+      },
+      {
+        prop: 'cellphone',
+        label: '电话号码',
+        minWidth: '100',
+        slotName: 'cellphone'
+      },
+      { prop: 'enable', label: '状态', minWidth: '100', slotName: 'enable' },
+      {
+        prop: 'createAt',
+        label: '创建时间',
+        minWidth: '250',
+        slotName: 'createAt'
+      },
+      {
+        prop: 'updateAt',
+        label: '更新时间',
+        minWidth: '250',
+        slotName: 'updateAt'
+      }
+    ]
+
+    const showIndexColumn = true
+    const showSelectColumn = true
+
+    const selectionChange = (value: any) => {
+      console.log(value)
+    }
+
+    return {
+      formData,
+      searchFormConfig,
+      userList,
+      propsList,
+      showIndexColumn,
+      showSelectColumn,
+      selectionChange
+    }
   }
 })
 </script>
@@ -65,6 +124,10 @@ export default defineComponent({
 <style scoped>
 .search-btn {
   text-align: right;
-  padding: 0 60px 22px 0;
+  padding: 0 90px 22px 0;
+}
+.table {
+  padding: 20px;
+  border-top: 20px solid #f0f2f5;
 }
 </style>

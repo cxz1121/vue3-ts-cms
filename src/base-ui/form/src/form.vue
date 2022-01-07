@@ -117,6 +117,6 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .infos {
-  padding: 22px 20px 0 0;
+  padding: 22px 50px 0 0;
 }
 </style>
